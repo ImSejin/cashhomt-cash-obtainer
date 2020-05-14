@@ -7,8 +7,7 @@
 
 
 ### Preview
-
-![preview](https://user-images.githubusercontent.com/46176032/81568229-7138fa80-93d8-11ea-9eb7-ef0c1543cd80.png)
+![cashhomt-macro-preview](https://user-images.githubusercontent.com/46176032/81943162-ff5dec80-9635-11ea-8600-e53dd5d54e9f.gif) ![preview](https://user-images.githubusercontent.com/46176032/81568229-7138fa80-93d8-11ea-9eb7-ef0c1543cd80.png)
 
 
 
