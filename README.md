@@ -4,6 +4,8 @@
 
 **Cashhomt Cash Obtainer** is macro program for '*com.kicklive.android.cashhomt* (android application)'.
 
+※ *The user is responsible for everything that happens using this program.*
+
 
 
 ### Preview
