@@ -88,7 +88,7 @@ Gui Add, GroupBox, x8 y104 w249 h49, Parameter
 Gui Add, Edit, x24 y123 w160 h18 gNameReceiver vVarNm, name
 Gui Add, Edit, x191 y123 w49 h18 gIndexReceiver vVarIdx, index
 
-Gui Show, w265 h160, CashHomeT :: Cash Obtainer
+Gui Show, w265 h160, cashhomt-cash-obtainer
 Return
 
 ; ------------------------------------------------------------------------------------------
