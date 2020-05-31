@@ -3,13 +3,13 @@
  * 
  * OS: 				Microsoft Windows 10
  * AndroidVersion: 	Android 7+
- * NoxVersion: 		6.6.0.1
+ * NoxVersion: 		6.6.0.1+
  * Display:			w=360 h=600 dpi=120
  * Setting:			Allways_Vertical_Screen(항상 세로화면으로 사용)
  */
-#Include %A_Temp%\AutoHotKey\lib\Gdip.ahk ; https://autohotkey.com/board/topic/29449-gdi-standard-library-145-by-tic
-#Include %A_Temp%\AutoHotKey\lib\Gdip_ImageSearch.ahk
-#Include %A_Temp%\AutoHotKey\lib\Utils.ahk
+#Include %A_Temp%\AutoHotKey\cashhomt-cash-obtainer\lib\Gdip.ahk ; https://autohotkey.com/board/topic/29449-gdi-standard-library-145-by-tic
+#Include %A_Temp%\AutoHotKey\cashhomt-cash-obtainer\lib\Gdip_ImageSearch.ahk
+#Include %A_Temp%\AutoHotKey\cashhomt-cash-obtainer\lib\Utils.ahk
 
 #SingleInstance Force
 #NoEnv
@@ -19,19 +19,33 @@ SetBatchLines -1
 
 ; ------------------------------------- 컴파일 패키징 ---------------------------------------
 
+; 배포 경로
+global DISTRIBUTION_PATH := A_Temp . "\AutoHotKey\cashhomt-cash-obtainer\"
+
 ; 최초 실행 시, 패키지 배포에 대한 동의 여부를 받는다
-isNotExist := FileExist(A_Temp "\AutoHotKey\cashhomet-macro.ini") = "" ? true : false
-IniRead, agreement, % A_Temp "\AutoHotKey\cashhomet-macro.ini", DISTRIBUTION, consent ; , false
+isNotExist := FileExist(DISTRIBUTION_PATH . "cashhomt-macro.ini") = "" ? true : false
+IniRead, agreement, % DISTRIBUTION_PATH . "cashhomt-macro.ini", DISTRIBUTION, consent ; , false
 didNotAgree := agreement == "true" ? false : true
 
 if (isNotExist || didNotAgree)
 {
 	; 동의 문구를 작성한다
-	msg := "본 프로그램 구동을 위해`n라이브러리를 아래의 경로에 배포해야 합니다.`n동의하시겠습니까?`n(동의하지 않으면 프로그램은 종료됩니다)`n`n"
+	msg =
+	(
+The libraries must be distributed to the path below to run this program. Do you agree?
+(If not, this program will be terminated.)
+		
+============ DISTRIBUTION PATH ============
+%DISTRIBUTION_PATH%
+
+=============== LIBRARIES ===============
+
+	)
 	packages := ["lib\Gdip.ahk", "lib\Gdip_ImageSearch.ahk", "lib\Utils.ahk", "img\btn_boost.bmp", "img\ghost.bmp", "img\btn_go_page.bmp", "img\ico_cashhomet.bmp", "img\btn_failed.bmp", "img\finish.bmp"]
 	for k, v in packages
 	{
-		msg .= A_Temp "\AutoHotKey\" v "`n"
+		;~ msg .= A_Temp "\AutoHotKey\" v "`n"
+		msg .= ".\" . v . "`n"
 	}
 	
 	; 라이브러리 배포에 동의하지 않으면 프로그램을 종료한다
@@ -42,35 +56,39 @@ if (isNotExist || didNotAgree)
 	}
 	
 	; 라이브러리 배포 동의서를 생성한다
-	IfNotExist, % A_Temp "\AutoHotKey"
+	IfNotExist, % DISTRIBUTION_PATH
 	{
-		FileCreateDir, % A_Temp "\AutoHotKey"
+		FileCreateDir, % DISTRIBUTION_PATH
 	}
-	IniWrite, true, % A_Temp "\AutoHotKey\cashhomet-macro.ini", DISTRIBUTION, consent
-	FileSetAttrib, +H, % A_Temp "\AutoHotKey\cashhomet-macro.ini"
+	IniWrite, true, % DISTRIBUTION_PATH . "cashhomt-macro.ini", DISTRIBUTION, consent
+	FileSetAttrib, +H, % DISTRIBUTION_PATH . "cashhomt-macro.ini"
 }
 
 ; 패키징한 라이브러리 및 이미지를 배포할 디렉터리를 생성한다
-IfNotExist, % A_Temp "\AutoHotKey\lib"
+IfNotExist, % DISTRIBUTION_PATH . "lib\"
 {
-	FileCreateDir, % A_Temp "\AutoHotKey\lib"
+	FileCreateDir, % DISTRIBUTION_PATH . "lib\"
 }
-IfNotExist, % A_Temp "\AutoHotKey\img"
+IfNotExist, % DISTRIBUTION_PATH . "img\"
 {
-	FileCreateDir, % A_Temp "\AutoHotKey\img"
+	FileCreateDir, % DISTRIBUTION_PATH . "img\"
+}
+IfNotExist, % DISTRIBUTION_PATH . "log\"
+{
+	FileCreateDir, % DISTRIBUTION_PATH . "log\"
 }
 
 ; 패키징한 라이브러리 및 이미지를 배포한다
-FileInstall, ..\lib\Gdip.ahk, %A_Temp%\AutoHotKey\lib\Gdip.ahk, 0
-FileInstall, ..\lib\Gdip_ImageSearch.ahk, %A_Temp%\AutoHotKey\lib\Gdip_ImageSearch.ahk, 0
-FileInstall, ..\lib\Utils.ahk, %A_Temp%\AutoHotKey\lib\Utils.ahk, 0
+FileInstall, ..\lib\Gdip.ahk, %DISTRIBUTION_PATH%\lib\Gdip.ahk, 0
+FileInstall, ..\lib\Gdip_ImageSearch.ahk, %DISTRIBUTION_PATH%\lib\Gdip_ImageSearch.ahk, 0
+FileInstall, ..\lib\Utils.ahk, %DISTRIBUTION_PATH%\lib\Utils.ahk, 0
 
-FileInstall, ..\img\btn_boost.bmp, %A_Temp%\AutoHotKey\img\btn_boost.bmp, 0
-FileInstall, ..\img\ghost.bmp, %A_Temp%\AutoHotKey\img\ghost.bmp, 0
-FileInstall, ..\img\btn_go_page.bmp, %A_Temp%\AutoHotKey\img\btn_go_page.bmp, 0
-FileInstall, ..\img\ico_cashhomet.bmp, %A_Temp%\AutoHotKey\img\ico_cashhomet.bmp, 0
-FileInstall, ..\img\btn_failed.bmp, %A_Temp%\AutoHotKey\img\btn_failed.bmp, 0
-FileInstall, ..\img\finish.bmp, %A_Temp%\AutoHotKey\img\finish.bmp, 0
+FileInstall, ..\img\btn_boost.bmp, %DISTRIBUTION_PATH%\img\btn_boost.bmp, 0
+FileInstall, ..\img\ghost.bmp, %DISTRIBUTION_PATH%\img\ghost.bmp, 0
+FileInstall, ..\img\btn_go_page.bmp, %DISTRIBUTION_PATH%\img\btn_go_page.bmp, 0
+FileInstall, ..\img\ico_cashhomet.bmp, %DISTRIBUTION_PATH%\img\ico_cashhomet.bmp, 0
+FileInstall, ..\img\btn_failed.bmp, %DISTRIBUTION_PATH%\img\btn_failed.bmp, 0
+FileInstall, ..\img\finish.bmp, %DISTRIBUTION_PATH%\img\finish.bmp, 0
 
 ; ------------------------------------------------------------------------------------------
 
@@ -95,10 +113,26 @@ Return
 
 ; ---------------------------------------- 전역변수 ----------------------------------------
 
-global appNm 		; Nox 인스턴스명
-	 , instIdx		; Nox 인스턴스 순서번호
-	 , isWaiting	; 광고 대기중인가?
-	 , isStopped	; 매크로를 정지했는가?
+; Nox 인스턴스명
+global appNm
+; Nox 인스턴스 순서번호
+global instIdx
+; 광고 대기중인가?
+global isWaiting
+; 매크로를 정지했는가?
+global isStopped
+; 캐시적립 버튼 이미지
+global IMG_CASH_GETTER := DISTRIBUTION_PATH . "img\btn_boost.bmp"
+; 광고 대기화면 이미지
+global IMG_WAITING_AD := DISTRIBUTION_PATH . "img\ghost.bmp"
+; 캐시적립 페이지 이동 버튼 이미지
+global IMG_GO_TO_GETTING_PAGE := DISTRIBUTION_PATH . "img\btn_go_page.bmp"
+; 캐시홈트 홈 아이콘 이미지
+global IMG_APP_ICON := DISTRIBUTION_PATH . "img\ico_cashhomet.bmp"
+; 캐시적립 실패 확인 버튼 이미지
+global IMG_FAILED_TO_GET := DISTRIBUTION_PATH . "img\btn_failed.bmp"
+; 모든 캐시적립 완료 이미지
+global IMG_FINISH := DISTRIBUTION_PATH . "img\finish.bmp"
 
 ; ------------------------------------------------------------------------------------------
 
@@ -189,14 +223,6 @@ Start: 	; 시작버튼
 	; 전역변수를 초기화한다
 	isWaiting := false
 	isStopped := false
-	
-	; 이미지경로를 지정한다
-	IMG_CASH_GETTER 		:= % A_Temp "\AutoHotKey\img\btn_boost.bmp"
-	IMG_WAITING_AD 			:= % A_Temp "\AutoHotKey\img\ghost.bmp"
-	IMG_GO_TO_GETTING_PAGE 	:= % A_Temp "\AutoHotKey\img\btn_go_page.bmp"
-	IMG_APP_ICON 			:= % A_Temp "\AutoHotKey\img\ico_cashhomet.bmp"
-	IMG_FAILED_TO_GET 		:= % A_Temp "\AutoHotKey\img\btn_failed.bmp"
-	IMG_FINISH		 		:= % A_Temp "\AutoHotKey\img\finish.bmp"
 	
 	; 녹스앱플레이어 윈도우 정보를 가져온다
 	WinGet, noxWinHandle, ID, %appNm%
