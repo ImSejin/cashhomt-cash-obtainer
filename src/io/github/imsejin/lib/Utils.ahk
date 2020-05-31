@@ -86,12 +86,27 @@ class Utils
 	 * 현재의 연월일시분초를 콘솔 형식으로 반환한다.
 	 *
 	 * <pre>
-	 * Utils.getConsoleTime(): "2020-02-19 14:18:03"
+	 * Utils.getConsoleTime(): "2020-02-19 14:18:03.532"
 	 * </pre>
 	 */
 	getConsoleTime()
 	{
-		FormatTime, consoleTime, , yyyy-MM-dd HH:mm:ss
-		return consoleTime
+		; FormatTime, consoleTime, , yyyy-MM-dd HH:mm:ss
+		; return consoleTime
+		
+		return % A_YYYY . "-" . A_MM . "-" . A_DD . " " . A_Hour . ":" . A_Min . ":" . A_Sec . "." . A_MSec
+	}
+	
+	/*
+	 * 해당 메시지를 지정한 파일에 로그를 남긴다.
+	 *
+	 * <pre>
+	 * Utils.logger("debugging", "logger.log"): "2020-02-19 14:18:03 debugging\n"
+	 * </pre>
+	 */
+	logger(msg, fileName)
+	{
+		FileAppend, % this.getConsoleTime() . " " . msg . "`n", %fileName%
+		return
 	}
 }
