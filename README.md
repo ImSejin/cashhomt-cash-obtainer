@@ -24,7 +24,7 @@
   * height: 600
   * dpi: 120
 
-* [cashhomt-cash-obtainer.exe]https://github.com/ImSejin/cashhomt-cash-obtainer/releases/download/v0.2.0/cashhomt-cash-obtainer.exe)
+* [cashhomt-cash-obtainer.exe](https://github.com/ImSejin/cashhomt-cash-obtainer/releases/download/v0.2.0/cashhomt-cash-obtainer.exe)
 
 
 
