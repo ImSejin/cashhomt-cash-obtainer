@@ -1,6 +1,8 @@
-# ![icon](https://raw.githubusercontent.com/ImSejin/cashhomt-cash-obtainer/master/target/resources/app-icon.ico)
+# ![icon](https://raw.githubusercontent.com/ImSejin/cashhomt-cash-obtainer/master/resources/app-icon.ico)
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/ImSejin/cashhomt-cash-obtainer) ![ahk](https://img.shields.io/badge/ahk-1.1.32-006600) ![GitHub](https://img.shields.io/github/license/imsejin/cashhomt-cash-obtainer) 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/ImSejin/cashhomt-cash-obtainer)
+![ahk](https://img.shields.io/badge/ahk-1.1.32-006600)
+![GitHub](https://img.shields.io/github/license/imsejin/cashhomt-cash-obtainer) 
 
 **Cashhomt Cash Obtainer** is macro program for '*com.kicklive.android.cashhomt* (android application)'.
 
@@ -22,7 +24,7 @@
   * height: 600
   * dpi: 120
 
-* [cashhomt-cash-obtainer.exe](https://github.com/ImSejin/cashhomt-cash-obtainer/blob/master/target/cashhomt-cash-obtainer.exe?raw=true)
+* [cashhomt-cash-obtainer.exe]https://github.com/ImSejin/cashhomt-cash-obtainer/releases/download/v0.2.0/cashhomt-cash-obtainer.exe)
 
 
 
