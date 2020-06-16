@@ -31,14 +31,14 @@ if (isNotExist || didNotAgree)
 {
 	; 동의 문구를 작성한다
 	msg =
-	(
-The libraries must be distributed to the path below to run this program. Do you agree?
-(If not, this program will be terminated.)
-		
-============ DISTRIBUTION PATH ============
-%DISTRIBUTION_PATH%
+	(Ltrim
+		The libraries must be distributed to the path below to run this program. Do you agree?
+		(If not, this program will be terminated.)
+				
+		============ DISTRIBUTION PATH ============
+		%DISTRIBUTION_PATH%
 
-=============== LIBRARIES ===============
+		=============== LIBRARIES ===============
 
 	)
 	packages := ["lib\Gdip.ahk", "lib\Gdip_ImageSearch.ahk", "lib\Utils.ahk", "img\btn_boost.bmp", "img\ghost.bmp", "img\btn_go_page.bmp", "img\ico_cashhomet.bmp", "img\btn_failed.bmp", "img\finish.bmp"]
