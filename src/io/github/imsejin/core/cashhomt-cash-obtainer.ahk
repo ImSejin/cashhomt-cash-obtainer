@@ -130,8 +130,10 @@ Gui Add, Text, x96 y72 w72 h17 +0x200, Stop / Ctrl+]
 Gui Add, Button, x184 y16 w56 h52 gExit, ¡á ; â– 
 Gui Add, Text, x176 y72 w70 h15 +0x200, Exit / Ctrl+\
 Gui Add, GroupBox, x8 y104 w249 h49, Parameter
-Gui Add, Edit, x24 y123 w160 h18 gNameReceiver vVarNm, name
-Gui Add, Edit, x191 y123 w49 h18 gIndexReceiver vVarIdx, index
+Gui Add, Edit, x24 y123 w160 h18 hWndHNameEditValue gNameReceiver vVarNm
+SendMessage 0x1501, 1, "name",, ahk_id %hNameEditValue% ; placeholder(EM_SETCUEBANNER)
+Gui Add, Edit, x191 y123 w49 h18 +Number +Right hWndHIndexEditValue gIndexReceiver vVarIdx
+SendMessage 0x1501, 1, "index",, ahk_id %hIndexEditValue% ; placeholder(EM_SETCUEBANNER)
 
 Gui Show, w265 h160, cashhomt-cash-obtainer
 Return
